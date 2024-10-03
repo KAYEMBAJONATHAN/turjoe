@@ -28,7 +28,6 @@ export default function Calculator() {
 
   return (
     <div style={{ textAlign: 'center', padding: '50px' }}>
-      <p style={{ color: 'gray' }}>This is the home page of my app.</p>
       {loading ? (
         <p>Loading...</p>
       ) : submitted && userData ? (
