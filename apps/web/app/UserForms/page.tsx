@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 
 interface UserFormProps {
@@ -21,25 +21,30 @@ export default function UserForm({ onSubmit }: UserFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: 'red'}}>{error}</p>}
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter your name"
-        style={{ padding: '10px', margin: '10px' }}
-      />
-      <input
-        type="number"
-        value={age || ''}
-        onChange={(e) => setAge(Number(e.target.value))}
-        placeholder="Enter your age"
-        style={{ padding: '10px', margin: '10px' }}
-      />
-      <button type="submit" style={{ padding: '10px', margin: '10px', border: 'solid 1px', color: '#880000' }}>
-        Submit
-      </button>
-    </form>
+    <div className="ui-flex ui-items-center ui-justify-center ui-min-h-screen ui-bg-gray-100">
+      <form onSubmit={handleSubmit} className="ui-space-y-4 ui-bg-white ui-p-8 ui-rounded ui-shadow-md ui-w-full ui-max-w-md">
+        {error && <p className="ui-text-red-500">{error}</p>}
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter your name"
+          className="ui-w-full ui-px-4 ui-py-2 ui-border ui-border-gray-300 ui-rounded focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+        />
+        <input
+          type="number"
+          value={age || ''}
+          onChange={(e) => setAge(Number(e.target.value))}
+          placeholder="Enter your age"
+          className="ui-w-full ui-px-4 ui-py-2 ui-border ui-border-gray-300 ui-rounded focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+        />
+        <button
+          type="submit"
+          className="ui-w-full ui-bg-indigo-500 ui-text-white ui-font-bold ui-py-2 ui-px-4 ui-rounded hover:ui-bg-indigo-600 focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }

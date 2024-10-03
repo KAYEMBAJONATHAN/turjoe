@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import UserForm from '../UserForms/page';
 
-
 export default function Calculator() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
