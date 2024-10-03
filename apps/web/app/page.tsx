@@ -1,10 +1,14 @@
 
-import Accordion from "@repo/ui/components/Accordion";
+
+
+
 import HomePage from "./homePage";
+import Navbar from "./Navbars/page";
 
 export default function Home() {
   return <div className="App">
+            <Navbar />
             <HomePage />
-            <Accordion />
+ 
         </div>
 }
