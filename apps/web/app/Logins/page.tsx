@@ -7,8 +7,11 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic
   };
+
+  const submitHandler = (e: React.FormEvent) => {
+     e.preventDefault()
+  }
 
   return (
     <div className="ui-flex ui-items-center ui-justify-center ui-min-h-screen ui-bg-gray-100">
@@ -38,6 +41,7 @@ export default function Login() {
           <button
             type="submit"
             className="ui-w-full ui-bg-indigo-500 ui-text-white ui-font-bold ui-py-2 ui-px-4 ui-rounded ui-hover:bg-indigo-600 ui-focus:outline-none ui-focus:ring-2 ui-focus:ring-indigo-400"
+             onSubmit={submitHandler}
           >
             Login
           </button>
