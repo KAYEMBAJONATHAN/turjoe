@@ -1,14 +1,24 @@
 'use client';
 import React, { useState } from 'react';
-import UserForm from '../UserForms/page';
 
 export default function Calculator() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState<number | undefined>(undefined);
+  const [error, setError] = useState<string | null>(null);
   const [userData, setUserData] = useState<{ name: string; age: number } | null>(null);
 
-  const handleFormSubmit = (name: string, age: number) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !age) {
+      setError('Please enter both name and age.');
+      return;
+    }
+
     setLoading(true);
+    setError(null);
+
     setTimeout(() => {
       setUserData({ name, age });
       setSubmitted(true);
@@ -19,6 +29,8 @@ export default function Calculator() {
   const handleReset = () => {
     setUserData(null);
     setSubmitted(false);
+    setName('');
+    setAge(undefined);
   };
 
   const calculateBirthYear = (age: number): number => {
@@ -39,7 +51,29 @@ export default function Calculator() {
           </button>
         </>
       ) : (
-        <UserForm onSubmit={handleFormSubmit} />
+        <form onSubmit={handleFormSubmit} className="ui-space-y-4 ui-bg-white ui-p-8 ui-rounded ui-shadow-md ui-w-full ui-max-w-md">
+          {error && <p className="ui-text-red-500">{error}</p>}
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
+            className="ui-w-full ui-px-4 ui-py-2 ui-border ui-border-gray-300 ui-rounded focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+          />
+          <input
+            type="number"
+            value={age || ''}
+            onChange={(e) => setAge(Number(e.target.value))}
+            placeholder="Enter your age"
+            className="ui-w-full ui-px-4 ui-py-2 ui-border ui-border-gray-300 ui-rounded focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+          />
+          <button
+            type="submit"
+            className="ui-w-full ui-bg-indigo-500 ui-text-white ui-font-bold ui-py-2 ui-px-4 ui-rounded hover:ui-bg-indigo-600 focus:ui-outline-none focus:ui-ring-2 focus:ui-ring-indigo-400"
+          >
+            Submit
+          </button>
+        </form>
       )}
     </div>
   );

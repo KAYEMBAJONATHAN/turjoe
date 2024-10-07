@@ -5,7 +5,6 @@ export default function Navbar() {
     <nav style={navStyle}>
       <ul style={ulStyle}>
         <li style={liStyle}><a href="/" style={linkStyle}>HomePage</a></li>
-        <li style={liStyle}><a href="/UserForms" style={linkStyle}>UserForm</a></li>
         <li style={liStyle}><a href="/Calculators" style={linkStyle}>Calculator</a></li>
         <li style={liStyle}><a href="/Abouts" style={linkStyle}>About</a></li>
         <li style={liStyle}><a href="/Contacts" style={linkStyle}>Contact</a></li>
