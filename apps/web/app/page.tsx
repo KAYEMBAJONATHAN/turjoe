@@ -1,7 +1,3 @@
-
-
-
-
 import HomePage from "./homePage";
 
 
