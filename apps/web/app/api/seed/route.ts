@@ -8,7 +8,6 @@ import {
 
 export async function seed() {
   try {
-    // Create the users and contact tables if they don't already exist
     const createTables = await sql`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -28,7 +27,6 @@ export async function seed() {
     `;
     console.log(`Created "users" and "contact" tables`);
 
-    // Insert user records
     const users = await Promise.all([
       sql`
         INSERT INTO users (name, email, image, password)
@@ -67,9 +65,32 @@ export async function seed() {
     ]);
     
     console.log(`Inserted ${contacts.length} contact records`);
-    
 
-    // Retrieve all users from the database
+    const posts = await Promise.all([
+      sql`cccccc
+        INSERT INTO contact (name, email, message)
+        VALUES ('John Doe', 'john@example.com', 'Hello, I am interested in your services.')
+        ON CONFLICT (email) DO NOTHING;
+      `,
+      sql`
+        INSERT INTO contact (name, email, message)
+        VALUES ('Jane Smith', 'jane@example.com', 'I would like more information about your pricing.')
+        ON CONFLICT (email) DO NOTHING;
+      `,
+      sql`
+        INSERT INTO contact (name, email, message)
+        VALUES ('Sam Brown', 'sam@example.com', 'Please send me more details about the project timelines.')
+        ON CONFLICT (email) DO NOTHING;
+      `,
+      sql`
+      INSERT INTO contact (name, email, message)
+      VALUES ('Samuel Brownly', 'sam@example.com', 'Please send me more details about the project timelines.')
+      ON CONFLICT (email) DO NOTHING;
+    `,
+    ]);
+    
+    console.log(`Inserted ${posts.length} contact records`);
+    
     const allUsers = await sql`
       SELECT * FROM users;
     `;
