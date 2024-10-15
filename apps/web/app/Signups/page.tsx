@@ -1,15 +1,18 @@
 'use client'
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import Input from '@/components/ui/input';
 import { useRouter } from 'next/router';
 
-export default function Login() {
+export default function SignUp() {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
 
   const router = useRouter();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -19,8 +22,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const res = await fetch('/api/login', {
+    const res = await fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,16 +31,38 @@ export default function Login() {
     });
 
     if (res.ok) {
-      router.push('/dashboard');
+      router.push('/login');
     } else {
-      console.error('Login failed');
+      console.error('Failed to sign up');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-sm p-4">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
+      <h2 className="text-xl font-bold mb-4">Sign Up</h2>
       <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-2">
+            <label htmlFor="firstName" className="text-sm font-medium">First Name</label>
+            <Input
+              id="firstName"
+              placeholder="Max"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <label htmlFor="lastName" className="text-sm font-medium">Last Name</label>
+            <Input
+              id="lastName"
+              placeholder="Robinson"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
         <div className="grid gap-2">
           <label htmlFor="email" className="text-sm font-medium">Email</label>
           <Input
@@ -62,12 +86,8 @@ export default function Login() {
           />
         </div>
         <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md">
-          Login
+          Create an Account
         </button>
-      </div>
-      <div className="mt-4 text-center text-sm">
-        Don't have an account?{' '}
-        <a href="/signup" className="underline text-blue-600">Sign up</a>
       </div>
     </form>
   );
