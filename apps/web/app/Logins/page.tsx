@@ -1,73 +1,39 @@
-'use client'
-import React,{ useState } from 'react';
-import Input from '@/components/ui/input';
-import { useRouter } from 'next/router';
+import React from 'react';
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const router = useRouter();
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (res.ok) {
-      router.push('/dashboard');
-    } else {
-      console.error('Login failed');
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-sm p-4">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
-      <div className="grid gap-4">
-        <div className="grid gap-2">
-          <label htmlFor="email" className="text-sm font-medium">Email</label>
-          <Input
+    <form action="/api/login" method="POST" className="ui-mx-auto ui-max-w-sm ui-p-4">
+      <h2 className="ui-text-xl ui-font-bold ui-mb-4">Login</h2>
+      <div className="ui-grid ui-gap-4">
+        <div className="ui-grid ui-gap-2">
+          <label htmlFor="email" className="ui-text-sm ui-font-medium">Email</label>
+          <input
             id="email"
+            name="email"
             type="email"
             placeholder="m@example.com"
-            value={formData.email}
-            onChange={handleChange}
+            className="ui-border ui-rounded-md ui-p-2 w-full"
             required
           />
         </div>
-        <div className="grid gap-2">
-          <label htmlFor="password" className="text-sm font-medium">Password</label>
-          <Input
+        <div className="ui-grid ui-gap-2">
+          <label htmlFor="password" className="ui-text-sm ui-font-medium">Password</label>
+          <input
             id="password"
+            name="password"
             type="password"
             placeholder="********"
-            value={formData.password}
-            onChange={handleChange}
+            className="ui-border ui-rounded-md ui-p-2 vw-full"
             required
           />
         </div>
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md">
+        <button type="submit" className="ui-w-full ui-bg-blue-600 ui-text-white ui-py-2 ui-rounded-md">
           Login
         </button>
       </div>
-      <div className="mt-4 text-center text-sm">
+      <div className="ui-mt-4 text-center text-sm">
         Don't have an account?{' '}
-        <a href="/signup" className="underline text-blue-600">Sign up</a>
+        <a href="/signup" className="ui-underline ui-text-blue-600">Sign up</a>
       </div>
     </form>
   );

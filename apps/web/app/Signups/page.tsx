@@ -1,91 +1,61 @@
-'use client'
-import React, { useState } from 'react';
-import Input from '@/components/ui/input';
-import { useRouter } from 'next/router';
+import React from 'react';
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-
-  const router = useRouter();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch('/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (res.ok) {
-      router.push('/login');
-    } else {
-      console.error('Failed to sign up');
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-sm p-4">
-      <h2 className="text-xl font-bold mb-4">Sign Up</h2>
-      <div className="grid gap-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="grid gap-2">
-            <label htmlFor="firstName" className="text-sm font-medium">First Name</label>
-            <Input
+    <form action="/api/signup" method="POST" className="ui-mx-auto ui-max-w-md ui-p-6 ui-bg-white ui-shadow-md ui-rounded-lg">
+      <h2 className="ui-text-2xl ui-font-bold ui-text-gray-800 ui-mb-6 ui-text-center">Create Your Account</h2>
+      <div className="ui-grid ui-gap-6">
+        <div className="ui-grid ui-grid-cols-2 ui-gap-6">
+          <div className="ui-grid ui-gap-2">
+            <label htmlFor="firstName" className="ui-text-sm ui-font-semibold ui-text-gray-700">First Name</label>
+            <input
               id="firstName"
+              name="firstName"
               placeholder="Max"
-              value={formData.firstName}
-              onChange={handleChange}
+              className="ui-border ui-border-gray-300 ui-rounded-md ui-p-3 ui-w-full uifocus:ring ui-focus:ring-blue-200 ui-focus:border-blue-500"
               required
             />
           </div>
-          <div className="grid gap-2">
-            <label htmlFor="lastName" className="text-sm font-medium">Last Name</label>
-            <Input
+          <div className="ui-grid ui-gap-2">
+            <label htmlFor="lastName" className="ui-text-sm ui-font-semibold ui-text-gray-700">Last Name</label>
+            <input
               id="lastName"
+              name="lastName"
               placeholder="Robinson"
-              value={formData.lastName}
-              onChange={handleChange}
+              className="ui-border ui-border-gray-300 ui-rounded-md ui-p-3 ui-w-full ui-focus:ring ui-focus:ring-blue-200 ui-focus:border-blue-500"
               required
             />
           </div>
         </div>
+
         <div className="grid gap-2">
-          <label htmlFor="email" className="text-sm font-medium">Email</label>
-          <Input
+          <label htmlFor="email" className="ui-text-sm ui-font-semibold ui-text-gray-700">Email</label>
+          <input
             id="email"
+            name="email"
             type="email"
             placeholder="m@example.com"
-            value={formData.email}
-            onChange={handleChange}
+            className="ui-border ui-border-gray-300 ui-rounded-md ui-p-3 ui-w-full ui-focus:ring ui-focus:ring-blue-200 ui-focus:border-blue-500"
             required
           />
         </div>
-        <div className="grid gap-2">
-          <label htmlFor="password" className="text-sm font-medium">Password</label>
-          <Input
+
+        <div className="ui-grid ui-gap-2">
+          <label htmlFor="password" className="ui-text-sm ui-font-semibold ui-text-gray-700">Password</label>
+          <input
             id="password"
+            name="password"
             type="password"
             placeholder="********"
-            value={formData.password}
-            onChange={handleChange}
+            className="ui-border ui-border-gray-300 ui-rounded-md ui-p-3 ui-w-full ui-focus:ring ui-focus:ring-blue-200 ui-focus:border-blue-500"
             required
           />
         </div>
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md">
+
+        <button
+          type="submit"
+          className="ui-w-full ui-bg-blue-600 ui-text-white ui-py-3 ui-rounded-md ui-hover:bg-blue-700 ui-focus:ring ui-focus:ring-blue-300"
+        >
           Create an Account
         </button>
       </div>
